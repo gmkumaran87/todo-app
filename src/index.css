@@ -12,8 +12,19 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
 }
 
+#root {
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	flex-flow: column;
+}
 @theme {
+	--color-black-para: #231f20;
 	--color-blue-primary: #034ea2;
+	--text-13: 13px;
+	--color-gray-border: #dddddd;
+	--color-gray-light: #767676;
 }

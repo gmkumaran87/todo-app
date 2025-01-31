@@ -1,0 +1,25 @@
+import React from 'react';
+
+const Task = ({ task, name, description, status }) => {
+	return (
+		<div className='flex flex-col items-start w-full gap-2 border-b border-gray-border p-3.5'>
+			<div className='flex items-center justify-between w-full'>
+				<div className='flex items-center justify-start gap-4'>
+					<div className='rounded-full border font-normal border-blue-primary flex items-center justify-center text-blue-primary size-8'>
+						{name.slice(0, 1).toUpperCase()}
+					</div>
+					<h3 className='text-blue-primary text-sm font-semibold'>{name}</h3>
+				</div>
+				<div className='flex items-center justify-start gap-1'>
+					<div className='bg-amber-600 size-2.5 rounded-full' />
+					<p>{status}</p>
+				</div>
+			</div>
+			{/* Description */}
+			<p className='w-[90%] pl-12 text-left text-xs text-black-para font-normal leading-[18px]'>{description}</p>
+			<p className='pl-12 mt-2 text-[10px] text-gray-light'>{task.createdAt}</p>
+		</div>
+	);
+};
+
+export default Task;
