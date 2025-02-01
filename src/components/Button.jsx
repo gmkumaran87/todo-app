@@ -1,5 +1,5 @@
-const Button = ({ label, clickHandler, type, color, width, bg, fontSize }) => {
-	let classes = 'p-2.5 h-10 w-[110px] rounded-sm font-medium';
+const Button = ({ label, clickHandler, type, color, width, bg, fontSize, disabled }) => {
+	let classes = 'p-2.5 h-10 w-[110px] rounded-sm font-medium cursor-pointer';
 
 	if (color) classes += ` ${color} `;
 
@@ -18,7 +18,7 @@ const Button = ({ label, clickHandler, type, color, width, bg, fontSize }) => {
 	}
 
 	return (
-		<button type={type} className={classes} onClick={clickHandler}>
+		<button type={type} className={classes} onClick={clickHandler} disabled={disabled}>
 			{label}
 		</button>
 	);
