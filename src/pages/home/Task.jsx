@@ -3,12 +3,8 @@ import { useTaskContext } from '../../context/AppContext';
 import { useNavigate } from 'react-router';
 import Pencil from '../../assets/Pencil.svg';
 import Trash from '../../assets/Trash.svg';
+import { STATUS_ICONS } from '../../constant/constant';
 
-const STATUS_ICONS = {
-	Pending: <span className='bg-gray-border size-2.5 rounded-full' />,
-	Completed: <span className='bg-[#368A04] size-2.5 rounded-full' />,
-	InProgress: <span className='bg-[#FFB03C] size-2.5 rounded-full' />,
-};
 const Task = ({ task, id, name, description, status }) => {
 	const { deleteTask } = useTaskContext();
 	const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const TaskContext = createContext();
@@ -6,7 +6,10 @@ export const TaskContext = createContext();
 const intialValue = { tasks: [], currentId: 0 };
 
 export const TaskContextWrapper = ({ children }) => {
-	const [state, setState] = useState(intialValue);
+	const [state, setState] = useState(() => {
+		const storedTodos = localStorage.getItem('todos');
+		return storedTodos ? { ...intialValue, tasks: JSON.parse(storedTodos) } : { ...intialValue, tasks: [] };
+	});
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	function createTask({ name, description }) {
@@ -43,6 +46,9 @@ export const TaskContextWrapper = ({ children }) => {
 		setState((prev) => ({ ...prev, tasks: newTasks }));
 	}
 
+	useEffect(() => {
+		localStorage.setItem('todos', JSON.stringify(state.tasks));
+	}, [state?.tasks]);
 	const memoizedValue = useMemo(
 		() => ({
 			...state,

@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import './App.css';
 import { Routes, Route } from 'react-router';
 import Home from './pages/home/Home';
@@ -9,14 +8,9 @@ import NavBar from './components/NavBar';
 import EditTask from './pages/EditTask';
 
 function App() {
-	// const [count, setCount] = useState(0);
-
 	return (
 		<TaskContextWrapper>
-			<div
-				className='w-[50%] flex justify-center items-start flex-col h-full overflow-hidden
-        '
-			>
+			<div className='w-[50%] flex justify-center items-start flex-col h-full overflow-hidden        '>
 				<NavBar />
 				<Routes>
 					<Route index element={<Home />} />

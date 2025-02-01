@@ -3,6 +3,10 @@ import Input from '../components/Input';
 import Button from '../components/Button';
 import { useTaskContext } from '../context/AppContext';
 import { useNavigate, useParams } from 'react-router';
+import { validation } from '../utils/helper';
+import TextArea from '../components/TextArea';
+import { STATUS_LABEL } from '../constant/constant';
+import SelectElement from '../components/SelectElement';
 
 const CreateTask = () => {
 	const [taskDetail, setTaskDetail] = useState({ name: '', description: '', status: 'Pending' });
@@ -11,17 +15,19 @@ const CreateTask = () => {
 	const navigate = useNavigate();
 	const params = useParams();
 
-	const taskId = +params.taskId;
+	const taskId = params.taskId;
 
 	useEffect(() => {
 		if (params?.taskId) {
 			const newTask = tasks.find((el) => +taskId === el.id);
 
+			console.log('Useeffect', newTask, params, tasks);
 			setTaskDetail({
-				id: taskId,
-				createdAt: newTask.createdAt,
+				id: +taskId,
+				// createdAt: newTask.createdAt,
 				name: newTask.name,
 				description: newTask.description,
+				status: newTask.status,
 			});
 		}
 	}, [taskId, tasks]);
@@ -35,7 +41,7 @@ const CreateTask = () => {
 	}, [error?.field]);
 	const handleChange = (e) => {
 		const { value, name } = e.target;
-
+		console.log('Change', value, name);
 		setTaskDetail((prev) => ({ ...prev, [name]: value }));
 	};
 
@@ -51,19 +57,9 @@ const CreateTask = () => {
 		}
 	};
 
-	const validation = (taskDetail) => {
-		if (taskDetail?.name === '') {
-			setError({ field: 'name', msg: 'Please enter the title' });
-			return true;
-		} else if (taskDetail?.description === '') {
-			setError({ field: 'description', msg: 'Please enter the description' });
-			return true;
-		}
-		return false;
-	};
-	const handleCancel = () => {
-		navigate('/');
-	};
+	const handleCancel = () => navigate('/');
+	console.log('State', taskDetail, taskId);
+
 	return (
 		<div className='flex w-full gap-4 flex-col items-start justify-start p-4 overflow-hidden h-full'>
 			<Input
@@ -74,30 +70,14 @@ const CreateTask = () => {
 				error={error}
 				paddingLeft='pl-3'
 			/>
-			<textarea
-				value={taskDetail.description}
-				onChange={handleChange}
+			<TextArea
 				name='description'
-				id='w3review'
-				className=' scrollbar overflow-auto h-28 w-full resize-none rounded-lg border border-gray-border p-2.5 text-sm text-black-200 placeholder:text-sm placeholder:font-normal placeholder:text-gray-300'
+				value={taskDetail.description}
 				placeholder='Enter the description'
+				handleChange={handleChange}
 			/>
-			{taskId ? (
-				<select
-					name='status'
-					className='mt-2 p-3 w-full border border-gray-border rounded-sm'
-					onChange={handleChange}
-				>
-					{['Pending', 'Completed', 'InProgress'].map((el, index) => (
-						<option key={index} value={el} data-content='EEE'>
-							{/* <span className='bg-green size-3 rounded-full' /> */}
-							{el}
-						</option>
-					))}
-				</select>
-			) : (
-				<></>
-			)}
+
+			{taskId && <SelectElement handleChange={handleChange} name='status' value={taskDetail.status} />}
 			<div className='w-full flex items-center justify-between mt-5'>
 				<Button label='Cancel' bg='bg-transparent' clickHandler={handleCancel} />
 				<Button
