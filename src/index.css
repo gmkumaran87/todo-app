@@ -21,11 +21,4 @@
 	height: 100vh;
 	flex-flow: column;
 }
-@theme {
-	--color-black-para: #231f20;
-	--color-blue-primary: #034ea2;
-	--text-13: 13px;
-	--color-gray-border: #dddddd;
-	--color-gray-light: #767676;
-	--color-back-light: #f3f6f9;
-}
+
