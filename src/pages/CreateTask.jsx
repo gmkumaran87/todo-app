@@ -41,7 +41,7 @@ const CreateTask = () => {
 	}, [error?.field]);
 	const handleChange = (e) => {
 		const { value, name } = e.target;
-		console.log('Change', value, name);
+
 		setTaskDetail((prev) => ({ ...prev, [name]: value }));
 	};
 
@@ -58,7 +58,6 @@ const CreateTask = () => {
 	};
 
 	const handleCancel = () => navigate('/');
-	console.log('State', taskDetail, taskId);
 
 	return (
 		<div className='flex w-full gap-4 flex-col items-start justify-start p-4 overflow-hidden h-full'>

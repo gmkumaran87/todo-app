@@ -8,7 +8,9 @@ const intialValue = { tasks: [], currentId: 0 };
 export const TaskContextWrapper = ({ children }) => {
 	const [state, setState] = useState(() => {
 		const storedTodos = localStorage.getItem('todos');
-		return storedTodos ? { ...intialValue, tasks: JSON.parse(storedTodos) } : { ...intialValue, tasks: [] };
+		console.log('Usestte', JSON.parse(storedTodos));
+		return storedTodos ? JSON.parse(storedTodos) : { ...intialValue, tasks: [] };
+		// return storedTodos ? { ...intialValue, tasks: JSON.parse(storedTodos) } : { ...intialValue, tasks: [] };
 	});
 
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -16,6 +18,7 @@ export const TaskContextWrapper = ({ children }) => {
 		const tasks = state.tasks;
 		const currentId = state.currentId;
 
+		console.log('Current ID', { currentId, curr: state.currentId });
 		setState((prev) => {
 			return {
 				...prev,
@@ -47,7 +50,7 @@ export const TaskContextWrapper = ({ children }) => {
 	}
 
 	useEffect(() => {
-		localStorage.setItem('todos', JSON.stringify(state.tasks));
+		localStorage.setItem('todos', JSON.stringify(state));
 	}, [state?.tasks]);
 	const memoizedValue = useMemo(
 		() => ({
@@ -58,6 +61,9 @@ export const TaskContextWrapper = ({ children }) => {
 		}),
 		[state, createTask, editTask, deleteTask]
 	);
+
+	console.log('Current ID', { state });
+
 	return <TaskContext.Provider value={memoizedValue}>{children}</TaskContext.Provider>;
 };
 

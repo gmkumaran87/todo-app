@@ -10,7 +10,7 @@ import EditTask from './pages/EditTask';
 function App() {
 	return (
 		<TaskContextWrapper>
-			<div className='w-[50%] flex justify-center items-start flex-col h-full overflow-hidden        '>
+			<div className='w-[50%] flex justify-center items-start flex-col h-full overflow-hidden'>
 				<NavBar />
 				<Routes>
 					<Route index element={<Home />} />

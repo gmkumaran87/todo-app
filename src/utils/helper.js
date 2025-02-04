@@ -8,3 +8,26 @@ export const validation = (taskDetail) => {
 	}
 	return false;
 };
+
+export const groupBy = (arr) => {
+	return arr.reduce((prev, curr) => {
+		if (prev[curr.status] === undefined) {
+			prev[curr.status] = [];
+		}
+		prev[curr.status].push(curr);
+		return prev;
+	}, {});
+};
+
+export function getSearchResult(arr, searchWord) {
+	// console.log('Arr', arr);
+
+	const res = arr.filter((el) => {
+		let lowerName = el.name.toLowerCase();
+
+		if (lowerName.includes(searchWord)) {
+			return el;
+		}
+	});
+	return res;
+}

@@ -11,7 +11,6 @@ const SelectElement = ({ handleChange, name, value }) => {
 		>
 			{STATUS_LABEL.map((el, index) => (
 				<option key={index} value={el}>
-					{/* <span className='bg-green size-3 rounded-full' /> */}
 					{el}
 				</option>
 			))}
