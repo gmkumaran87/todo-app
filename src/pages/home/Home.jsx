@@ -33,7 +33,7 @@ const Home = () => {
 		<div className='flex w-full gap-3 flex-col items-start justify-between p-4 overflow-hidden h-full'>
 			<div className='w-full flex flex-col items-start justify-start gap-5 overflow-auto'>
 				<SearchInput searchWord={searchWord} handleChange={handleChange} />
-				<TaskItems groupedTasks={groupBy(newTask)} />
+				{newTask?.length > 0 ? <TaskItems groupedTasks={groupBy(newTask)} />: <></>}
 			</div>
 			<div className='w-full flex justify-end'>
 				<div
